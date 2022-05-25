@@ -258,6 +258,8 @@ class AlienInvasion:
     def write_high_score(self):
         filename = 'high_score.txt'
         with open(filename, 'a') as f:
+            f.seek(0)
+            f.truncate()
             f.write(str(self.stats.high_score))
 
     def _update_screen(self):

@@ -1,3 +1,6 @@
+import json
+
+
 class GameStats:
     """游戏信息统计"""
     
@@ -6,7 +9,10 @@ class GameStats:
         self.settings = ai_game.settings
         self.reset_stats()
         self.game_active = False
-        self.high_score = 0
+        with open('high_score.txt', 'r') as file_object:
+            number = json.load(file_object)
+        self.high_score = number
+
         
     def reset_stats(self):
         """游戏信息统计"""
