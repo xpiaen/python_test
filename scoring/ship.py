@@ -3,45 +3,45 @@ import pygame
 from pygame.sprite import Sprite
  
 class Ship(Sprite):
-    """A class to manage the ship."""
+    """管理飞船的类"""
  
     def __init__(self, ai_game):
-        """Initialize the ship and set its starting position."""
+        """初始化飞船并设置其初始位置"""
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
 
-        # Load the ship image and get its rect.
+        # 加载飞船图像并获取其外接矩阵
         self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
 
-        # Start each new ship at the bottom center of the screen.
+        # 对于飞船,都将其放在屏幕底部的中央
         self.rect.midbottom = self.screen_rect.midbottom
 
-        # Store a decimal value for the ship's horizontal position.
+        # 在飞船的属性x中存储小数值
         self.x = float(self.rect.x)
 
-        # Movement flags
+        # 移动标记
         self.moving_right = False
         self.moving_left = False
 
     def update(self):
-        """Update the ship's position based on movement flags."""
-        # Update the ship's x value, not the rect.
+        """根据移动标志调整飞船的位置"""
+        # 更新飞船而不是rect对象的x值
         if self.moving_right and self.rect.right < self.screen_rect.right:
             self.x += self.settings.ship_speed
         if self.moving_left and self.rect.left > 0:
             self.x -= self.settings.ship_speed
 
-        # Update rect object from self.x.
+        # 根据self.x更新rect对象
         self.rect.x = self.x
 
     def blitme(self):
-        """Draw the ship at its current location."""
+        """在指定位置绘制梅琳娜"""
         self.screen.blit(self.image, self.rect)
 
     def center_ship(self):
-        """Center the ship on the screen."""
+        """让飞船在屏幕底端中间"""
         self.rect.midbottom = self.screen_rect.midbottom
         self.x = float(self.rect.x)
