@@ -229,7 +229,7 @@ class AlienInvasion:
             # 暂停
             sleep(0.5)
         else:
-            self.write_high_score()
+            self.stats.write_high_score(self.stats.high_score)
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
 
@@ -254,13 +254,6 @@ class AlienInvasion:
                 # 像飞船被撞到一样处理
                 self._ship_hit()
                 break
-
-    def write_high_score(self):
-        filename = 'high_score.txt'
-        with open(filename, 'a') as f:
-            f.seek(0)
-            f.truncate()
-            f.write(str(self.stats.high_score))
 
     def _update_screen(self):
         """更新屏幕上的图像,并切换到新屏幕"""
